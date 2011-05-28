@@ -5,12 +5,28 @@
   h1#counter
 
 script(type='text/javascript')
- var counter = 0;
-  $(document).ready(function() {
-    inc = function() {
-      counter++;
-      $("#counter").html(counter);
-    }
-    setInterval( inc, 100);
-  });
 
+  var serverTime = 0;
+  var localTime = 0;
+  var timeDiff = 0;
+
+  $(document).ready(function() {
+
+    now.receiveTime = function(time) {
+      serverTime = time;
+      localTime = (new Date).getTime();
+      timeDiff = localTime - serverTime;
+    };
+
+    now.ready(function() {
+      now.getTime();
+    });
+
+    increment = function() {
+      serverTime++;
+      localTime++;
+      $("#counter").html('' + serverTime + ' + ' + timeDiff);
+    }
+    setInterval(increment, 100);
+
+  });
