@@ -28,26 +28,31 @@ app.configure('production', function(){
 
 // Routes
 
-u = 'renegadesofjazz%2Fkid-loco-the-passenger'
-app.get('/(:steps)?', function(req, res){
-  res.render('index', {
-    title: 'Express',
-    url: 'http%3A%2F%2Fsoundcloud.com%2F'+u+'&amp;enable_api=true&amp;object_id=scPlayer',
-    steps: (req.params.steps ? req.params.steps : 100 )
-  });
-});
+pos = (new Date).getTime();
+u = 'renegadesofjazz%2Fkid-loco-the-passenger';
 
 app.get('/counter/(:steps)?', function(req, res){
   res.render('counter_io', {
     title: 'Express',
-    steps: (req.params.steps ? req.params.steps : 100 )
+    steps: req.param( 'steps', 100 )
+  });
+});
+
+app.get('/(:steps)?', function(req, res){
+  if(req.param('pos')) {
+    pos = (new Date).getTime();
+  }
+  res.render('index', {
+    title: 'Express',
+    url: 'http%3A%2F%2Fsoundcloud.com%2F'+u+'&amp;enable_api=true&amp;object_id=scPlayer',
+    steps: req.param( 'steps', 100 )
   });
 });
 app.listen(3000);
 
 
 serverTime = function() {
-  return (new Date).getTime() % 1306598990000;
+  return (new Date).getTime() - pos;
 }
 
 
