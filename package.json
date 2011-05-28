@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "name": "musync",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rngtng/musync.git"
+  },
+  "engines": {
+    "node": "~v0.4.7"
+  },
+  "dependencies": { 
+    "express" : "> 0", 
+    "now"  : "> 0"
+  },
+  "devDependencies": {}
+}
