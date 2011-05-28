@@ -1,7 +1,7 @@
 {
   "author": "",
   "name": "musync",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/rngtng/musync.git"
@@ -11,7 +11,8 @@
   },
   "dependencies": { 
     "express" : "> 0", 
-    "now" : "> 0"
-  },
-  "devDependencies": {}
+    "now" : "> 0",  
+    "sass": ">= 0.0.1",
+    "jade": ">= 0.0.1"
+  }
 }
