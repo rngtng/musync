@@ -63,5 +63,9 @@ script(type='text/javascript')
       setInterval(getTime, steps);
     });
 
+    soundcloud.addEventListener('onMediaPause', function(player, data) {
+       playing = false;
+    });
+
   });
 
