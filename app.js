@@ -36,4 +36,7 @@ app.get('/', function(req, res){
 });
 
 app.listen(3000);
+
+var everyone = require("now").initialize(app);
+
 console.log("Express server listening on port %d", app.address().port);

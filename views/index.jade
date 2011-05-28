@@ -1,2 +1,10 @@
 h1= title
 p Welcome to #{title}
+
+script(type='text/javascript', src='/nowjs/now.js')
+
+script(type='text/javascript')
+  now.ready(function(){
+    // alerts "Hello World!"
+    alert(now.msg);
+  });
