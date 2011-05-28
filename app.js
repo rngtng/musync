@@ -51,8 +51,9 @@ serverTime = function() {
 
 var socket = require('socket.io').listen(app);
 socket.on('connection', function(client){
-  client.send(serverTime());
-  //client.on('message', function(){ });
+  client.on('message', function(){
+    client.send(serverTime());
+  });
   //client.on('disconnect', function(){ … })
 });
 

@@ -13,7 +13,7 @@ script(type='text/javascript')
 
   $(document).ready(function() {
     var socket = new io.Socket();
-    
+
     receiveTime = function(time) {
       timeDiff = ((new Date).getTime() - localTime) / 2;
       console.log(timeDiff);
@@ -22,13 +22,13 @@ script(type='text/javascript')
 
     socket.on('connect', function(){
       localTime = (new Date).getTime();
-      //socket.send();
+      socket.send();
     })
+
     socket.on('message', function(data){
-      console.log(parseInt(data));
-      console.log(localTime);
       receiveTime(parseInt(data));
     })
+
     socket.connect();
 
     increment = function() {
