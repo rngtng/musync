@@ -23,8 +23,7 @@ script(type='text/javascript')
     });
 
     increment = function() {
-      serverTime++;
-      localTime++;
+      serverTime += 100;
       $("#counter").html('' + serverTime + ' + ' + timeDiff);
     }
     setInterval(increment, 100);

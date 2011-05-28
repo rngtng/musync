@@ -52,7 +52,7 @@ app.listen(3000);
 var everyone = require("now").initialize(app);
 
 everyone.now.getTime = function(){
-  everyone.now.receiveTime((new Date).getTime());
+  this.now.receiveTime((new Date).getTime());
 };
 
 everyone.now.distribute = function(message){
