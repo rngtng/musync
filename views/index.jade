@@ -1,14 +1,5 @@
-h1= title
-p Welcome to #{title}
+#header
+  h1 mu:sync
 
-script(type='text/javascript', src='http://code.jquery.com/jquery-1.5.min.js')
-script(type='text/javascript', src='/nowjs/now.js')
-
-script(type='text/javascript')
-  now.name = prompt("What's your name?", "");
-  now.receive = function(name, message){
-    $("#messages").append("<br>"+name+": "+message);
-  }
-  $("#send-button").click(function(){
-    now.distribute($("#text-input").val());
-  });
+#player-wrapper
+  #song-title Nicolas Jaar: Waterfalls
