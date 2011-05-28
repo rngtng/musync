@@ -13,35 +13,28 @@ script(type='text/javascript')
 
   $(document).ready(function() {
     var socket = new io.Socket();
-    socket.on('connect', function(){
-      socket.send('hi!');
-    })
-    socket.on('message', function(data){
-      alert(data);
-    })
-    socket.on('disconnect', function(){})
-
-    var socket = new io.Socket({node_server_url});
-    socket.connect();
-    socket.on('connect', function(){ })
-     socket.on('message', function(){ … })
-     socket.on('disconnect', function(){ … })
-
-
-    now.receiveTime = function(time) {
+    
+    receiveTime = function(time) {
       timeDiff = ((new Date).getTime() - localTime) / 2;
+      console.log(timeDiff);
       serverTime = time + timeDiff;
     };
 
-    now.ready(function() {
+    socket.on('connect', function(){
       localTime = (new Date).getTime();
-      now.getTime();
-    });
+      //socket.send();
+    })
+    socket.on('message', function(data){
+      console.log(parseInt(data));
+      console.log(localTime);
+      receiveTime(parseInt(data));
+    })
+    socket.connect();
 
     increment = function() {
       serverTime += steps;
       $("#counter").html('' + (serverTime / steps) + ' + ' + timeDiff);
     }
     setInterval(increment, steps);
-
   });
+
