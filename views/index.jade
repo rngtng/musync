@@ -1,10 +1,14 @@
 h1= title
 p Welcome to #{title}
 
+script(type='text/javascript', src='http://code.jquery.com/jquery-1.5.min.js')
 script(type='text/javascript', src='/nowjs/now.js')
 
 script(type='text/javascript')
-  now.ready(function(){
-    // alerts "Hello World!"
-    alert(now.msg);
+  now.name = prompt("What's your name?", "");
+  now.receive = function(name, message){
+    $("#messages").append("<br>"+name+": "+message);
+  }
+  $("#send-button").click(function(){
+    now.distribute($("#text-input").val());
   });
