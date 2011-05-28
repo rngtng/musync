@@ -7,11 +7,11 @@
     "url": "git://github.com/rngtng/musync.git"
   },
   "engines": {
-    "node": "~v0.4.7"
+    "node": ">= 0.4.7"
   },
   "dependencies": { 
     "express" : "> 0", 
-    "now"  : "> 0"
+    "now" : "> 0"
   },
   "devDependencies": {}
 }
