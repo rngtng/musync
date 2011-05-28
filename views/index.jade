@@ -1,12 +1,12 @@
 #header
   h1 mu:sync
 
-#player-wrapper
-  #song-title Nicolas Jaar: Waterfalls
+#main-content-box
+  h2#song-title Nicolas Jaar: Waterfalls
+    #player
+      a(href='http://soundcloud.com/matas/hobnotropic', class='sc-player')
 
-    div#messages
-
-    form(action='#')
-      textarea#text-input
-
-      input#send-button(type='submit')
+script
+  $('.sc-player').scPlayer({
+    autoPlay  :   true
+  });

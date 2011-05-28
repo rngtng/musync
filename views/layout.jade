@@ -3,6 +3,9 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/soundcloud/sc-player-minimal.css')
     script(type='text/javascript', src='http://code.jquery.com/jquery-1.5.min.js')
     script(type='text/javascript', src='/nowjs/now.js')
   body!= body
+    script(type='text/javascript', src='/javascripts/soundcloud.player.api.js')
+    script(type='text/javascript', src='/javascripts/sc-player.js')

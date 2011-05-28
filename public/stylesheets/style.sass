@@ -20,7 +20,7 @@ body
   h1
     :color white
     :text-align center
-#player-wrapper
+#main-content-box
   :width 630px
   :height 200px
   :border 1px solid #333
@@ -29,10 +29,16 @@ body
   :-moz-border-radius 25px
   :border-radius 25px
   :padding 25px
-  #song-title
+  h2#song-title
     :color #333
     :font-size 26px
     :font-weight lighter
     :text-align center
+  #player
+    .sc-player
+      :visiblity hidden
+      :width 0
+      :height 0
+      :overflow hidden
 a
   :color #00B7FF
