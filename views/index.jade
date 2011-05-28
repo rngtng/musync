@@ -16,6 +16,7 @@ script(type='text/javascript')
   var timeDiff = 0;
   var steps = #{steps};
   var loaded = false;
+  var playing = false;
   var pl;
 
   $(document).ready(function() {
@@ -25,8 +26,11 @@ script(type='text/javascript')
       timeDiff = ((new Date).getTime() - localTime) / 2;
       serverTime = time + timeDiff;
       $("#counter").html('' + (serverTime / steps) + ' + ' + timeDiff);
-      pl.api_seekTo(serverTime / 1000 );
-      pl.api_play();
+      if(!playing) {
+        playing = true;
+        pl.api_seekTo(serverTime / 1000 );
+        pl.api_play();
+      }
     };
 
     getTime = function() {
@@ -56,7 +60,7 @@ script(type='text/javascript')
       loaded = true;
       console.log('track loaded!');
       getTime();
-      //setInterval(getTime, steps);
+      setInterval(getTime, steps);
     });
 
   });
