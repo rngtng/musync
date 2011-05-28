@@ -41,7 +41,7 @@ var everyone = require("now").initialize(app);
 
 everyone.now.distribute = function(message){
   // this.now exposes caller's scope
-  everyone.now.receive(this.now.name, message);
+  this.now.receive(message);
 };
 
 console.log("Express server listening on port %d", app.address().port);
