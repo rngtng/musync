@@ -41,9 +41,10 @@ app.get('/chat', function(req, res){
   });
 });
 
-app.get('/counter', function(req, res){
+app.get('/counter/(:steps)?', function(req, res){
   res.render('counter', {
-    title: 'Express'
+    title: 'Express',
+    steps: (req.params.steps ? req.params.steps : 100 )
   });
 });
 
@@ -52,7 +53,8 @@ app.listen(3000);
 var everyone = require("now").initialize(app);
 
 everyone.now.getTime = function(){
-  this.now.receiveTime((new Date).getTime());
+  var time = (new Date).getTime() % 1306598990000;
+  this.now.receiveTime(time);
 };
 
 everyone.now.distribute = function(message){
