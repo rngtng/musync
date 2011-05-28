@@ -13,12 +13,12 @@ script(type='text/javascript')
   $(document).ready(function() {
 
     now.receiveTime = function(time) {
-      serverTime = time;
-      localTime = (new Date).getTime();
-      timeDiff = localTime - serverTime;
+      timeDiff = ((new Date).getTime() - localTime) / 2;
+      serverTime = time + timeDiff;
     };
 
     now.ready(function() {
+      localTime = (new Date).getTime();
       now.getTime();
     });
 
