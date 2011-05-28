@@ -4,9 +4,42 @@
 #main-content-box
   h2#song-title Nicolas Jaar: Waterfalls
     #player
-      a(href='http://soundcloud.com/dodus_afarensis/nicolas-jaar-live-fall-08', class='sc-player')
+      object.scPlayer(classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000')
+        param(name='movie', value='http://player.soundcloud.com/player.swf?url=' + url)
+        param(name='allowscriptaccess', value='always')
+        embed.scPlayerEmbed(allowscriptaccess='always', src='http://player.soundcloud.com/player.swf?url=' + url, type='application/x-shockwave-flash', name='scPlayer')
 
-script
-  $('.sc-player').scPlayer({
-    autoPlay  :   true
+script(type='text/javascript')
+
+  var serverTime = 0;
+  var localTime = 0;
+  var timeDiff = 0;
+  var steps = #{steps};
+
+  $(document).ready(function() {
+    var socket = new io.Socket();
+
+    receiveTime = function(time) {
+      timeDiff = ((new Date).getTime() - localTime) / 2;
+      serverTime = time + timeDiff;
+    };
+
+    socket.on('connect', function(){
+      localTime = (new Date).getTime();
+      socket.send('ping');
+    })
+
+    socket.on('message', function(message){
+      if(message.cmd == 'ping') {
+        receiveTime(parseInt(message.data));
+      }
+    })
+
+    socket.connect();
+
+    increment = function() {
+      serverTime += steps;
+      $("#counter").html('' + (serverTime / steps) + ' + ' + timeDiff);
+    }
+    setInterval(increment, steps);
   });

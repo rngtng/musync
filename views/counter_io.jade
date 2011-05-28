@@ -16,25 +16,26 @@ script(type='text/javascript')
 
     receiveTime = function(time) {
       timeDiff = ((new Date).getTime() - localTime) / 2;
-      console.log(timeDiff);
       serverTime = time + timeDiff;
+      $("#counter").html('' + (serverTime / steps) + ' + ' + timeDiff);
+    };
+
+    getTime = function() {
+      localTime = (new Date).getTime();
+      socket.send('ping');
     };
 
     socket.on('connect', function(){
-      localTime = (new Date).getTime();
-      socket.send();
+      getTime();
     })
 
-    socket.on('message', function(data){
-      receiveTime(parseInt(data));
+    socket.on('message', function(message){
+      if(message.cmd == 'ping') {
+        receiveTime(parseInt(message.data));
+      }
     })
-
     socket.connect();
 
-    increment = function() {
-      serverTime += steps;
-      $("#counter").html('' + (serverTime / steps) + ' + ' + timeDiff);
-    }
-    setInterval(increment, steps);
+    setInterval(getTime, steps);
   });
 
