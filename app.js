@@ -41,6 +41,12 @@ app.get('/chat', function(req, res){
   });
 });
 
+app.get('/counter', function(req, res){
+  res.render('counter', {
+    title: 'Express'
+  });
+});
+
 app.listen(3000);
 
 var everyone = require("now").initialize(app);

@@ -1,0 +1,16 @@
+#header
+  h1 mu:sync
+
+#main-content-box
+  h1#counter
+
+script(type='text/javascript')
+ var counter = 0;
+  $(document).ready(function() {
+    inc = function() {
+      counter++;
+      $("#counter").html(counter);
+    }
+    setInterval( inc, 100);
+  });
+
