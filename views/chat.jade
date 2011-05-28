@@ -1,0 +1,22 @@
+#header
+  h1 mu:sync
+
+#main-content-box
+  form(action='#')
+    input#text-input
+    input#send-button(type='submit')
+
+  #messages
+
+script(type='text/javascript')
+  $(document).ready(function() {
+
+    now.receive = function(message) {
+      $("#messages").append(message + "<br>");
+    };
+
+    $("#send-button").click(function(){
+      now.distribute($("#text-input").val());
+      return false;
+    });
+  });
