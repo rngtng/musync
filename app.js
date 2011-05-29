@@ -29,7 +29,7 @@ app.configure('production', function(){
 // Routes
 
 pos = (new Date).getTime();
-u = 'renegadesofjazz%2Fkid-loco-the-passenger';
+u = 'plainstudios%2Fshort-records-rock';
 
 app.get('/counter/(:steps)?', function(req, res){
   res.render('counter_io', {
