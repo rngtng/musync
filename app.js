@@ -46,7 +46,7 @@ app.get('/(:code)?', function(req, res){
       res.render('play', {
         url: encodeURIComponent(song.url ) + '&enable_api=true&object_id=scPlayer',
         code: req.param('code'),
-        interval: req.param('int', 1000)
+        interval: req.param('int', 5000)
       });
     }
   }
