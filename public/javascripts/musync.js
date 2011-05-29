@@ -38,7 +38,7 @@
     },
 
     setCounter: function() {
-      $("#counter").html('' + (this.serverSongTime / 1000) + ' + NwDelay: ' + this.networkDelay + 'ClockDiff:' + this.clockDiff);
+      $("#counter").html('' + (this.serverSongTime / 1000) + ' + NwDelay: ' + this.networkDelay + ' ClockDiff:' + this.clockDiff);
     },
 
     startPlay: function(fadeInTime) {
