@@ -11,6 +11,9 @@
     player: null,
     code: null,
 
+    fadeInTime: 100,
+    fadeInSteps: 1.25,
+
     clientTime: function() {
       return (new Date).getTime();
     },
@@ -29,7 +32,7 @@
       if(this.loaded) {
         this.player.api_seekTo(this.serverSongTime / 1000 );
         if(this.playing) {
-          this.startPlay();
+          this.startPlay(150);
         }
       }
     },
@@ -38,9 +41,21 @@
       $("#counter").html('' + (this.serverSongTime / 1000) + ' + NwDelay: ' + this.networkDelay + 'ClockDiff:' + this.clockDiff);
     },
 
-    startPlay: function() {
+    startPlay: function(fadeInTime) {
       if(this.player) {
         this.player.api_play();
+        if(this.player.api_getVolume() < 1) {
+          this.turnUpVolume();
+        }
+      }
+    },
+
+    turnUpVolume: function() {
+      mu = musync;
+      vol = mu.player.api_getVolume();
+      if(mu.fadeInTime && vol < 100) {
+        mu.player.api_setVolume((1 + vol) * mu.fadeInSteps);
+        setTimeout(mu.turnUpVolume, mu.fadeInTime);
       }
     },
 
@@ -48,6 +63,7 @@
       mu = musync;
       mu.player = soundcloud.getPlayer('scPlayer');
       mu.startPlay();
+      mu.player.api_setVolume(0);
       mu.getTime();
       console.log(mu.interval);
       setInterval(mu.getTime, mu.interval);
@@ -68,6 +84,7 @@
     },
 
     onMediaPause: function(pl, data) {
+      mu.player.api_setVolume(0);
       mu = musync;
       mu.playing = false;
     },
