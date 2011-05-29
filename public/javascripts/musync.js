@@ -33,7 +33,7 @@
     },
 
     setCounter: function() {
-      $("#counter").html('' + (this.serverTime / this.interval) + ' + ' + this.timeDiff);
+      $("#counter").html('' + (this.serverTime / 1000) + ' + ' + this.timeDiff);
     },
 
     startPlay: function() {
