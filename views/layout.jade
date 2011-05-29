@@ -1,10 +1,15 @@
 !!!
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title m[:u]sync
+
+    link(rel="stylesheet", href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css", type="text/css")
+    link(rel='stylesheet', href='/stylesheets/style.css', type="text/css")
     script(type='text/javascript', src='http://code.jquery.com/jquery-1.4.2.min.js')
     script(type='text/javascript', src='/socket.io/socket.io.js')
-  body!= body
-    script(type='text/javascript', src='/javascripts/soundcloud.player.api.js')
-    //script(type='text/javascript', src='/javascripts/sc-player.js')
+  body
+    #header
+      h1 m[:u]sync
+
+    #main-content-box
+      != body

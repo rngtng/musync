@@ -1,0 +1,17 @@
+.header Playing:
+#player
+  object.scPlayer(classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000')
+    param(name='movie', value='http://player.soundcloud.com/player.swf?url=' + url)
+    param(name='allowscriptaccess', value='always')
+    embed.scPlayerEmbed(allowscriptaccess='always', src='http://player.soundcloud.com/player.swf?url=' + url, type='application/x-shockwave-flash', name='scPlayer')
+
+a(href='?reset=true') reset
+#counter
+
+script(type='text/javascript')
+  $(document).ready(function() {
+    musync.init('#{code}', #{interval});
+  });
+
+script(type='text/javascript', src='/javascripts/soundcloud.player.api.js')
+script(type='text/javascript', src='/javascripts/musync.js')

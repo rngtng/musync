@@ -1,72 +1,12 @@
-#header
-  h1 mu:sync
+//http://soundcloud.com/frohlocker/caterina-valente-ich-h-tt-getanzt-heut-nacht-frohlocker-remix
+.header Paste your favorite SoundCloud URL:
+form(action="/")
+  input(name="url",
+        class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c",
+        value="http://soundcloud.com/plainstudios/short-records-rock")
 
-#main-content-box
-  h1#counter
-  #player
-    object.scPlayer(classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000')
-      param(name='movie', value='http://player.soundcloud.com/player.swf?url=' + url)
-      param(name='allowscriptaccess', value='always')
-      embed.scPlayerEmbed(allowscriptaccess='always', src='http://player.soundcloud.com/player.swf?url=' + url, type='application/x-shockwave-flash', name='scPlayer')
-
-script(type='text/javascript')
-
-  var serverSongTime = 0;
-  var localPingSendTime = 0;
-  var networkDelay = 0;
-  var steps = #{steps};
-  var loaded = false;
-  var playing = false;
-  var pl;
-
-  $(document).ready(function() {
-    var socket = new io.Socket();
-
-    receiveTime = function(songTime, serverTime) {
-      var currentLocalTime = (new Date).getTime();
-      networkDelay = (currentLocalTime - localPingSendTime) / 2;
-      serverSongTime = songTime + networkDelay;
-      $("#counter").html(' networkDelay:' + networkDelay + ' clockdiff:' + (currentLocalTime - serverTime + networkDelay) );
-      if(!playing) {
-        playing = true;
-        pl.api_seekTo(serverSongTime / 1000 );
-        pl.api_play();
-      }
-    };
-
-    getServerTime = function() {
-      localPingSendTime = (new Date).getTime();
-      socket.send('ping');
-    };
-
-    socket.on('message', function(message){
-      if(message.cmd == 'ping') {
-        receiveTime(parseInt(message.data), parseInt(message.serverTime));
-      }
-    })
-    socket.connect();
-
-    soundcloud.addEventListener('onPlayerReady', function(player, data) {
-      pl = soundcloud.getPlayer('scPlayer');
-      pl.api_play();
-    });
-
-    soundcloud.addEventListener('onMediaPlay', function(player, data) {
-      if(!loaded) {
-        pl.api_stop();
-      }
-    });
-
-    soundcloud.addEventListener('onMediaDoneBuffering', function(player, data) {
-      loaded = true;
-      console.log('track loaded!');
-      getServerTime();
-      setInterval(getServerTime, steps);
-    });
-
-    soundcloud.addEventListener('onMediaPause', function(player, data) {
-       playing = false;
-    });
-
-  });
+  div(data-theme="c", class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c")
+    span(class="ui-btn-inner ui-btn-corner-all")
+      span(class="ui-btn-text") Create
+    input#jjCreateSubmit(name="create", type="submit", value="Create", class="ui-btn-hidden")
 

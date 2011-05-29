@@ -4,7 +4,8 @@
  */
 
 var express = require('express'),
-    app = module.exports = express.createServer();
+    app     = module.exports = express.createServer()
+    songs   = {}; // { code : { url: <url>, time: <time>}}
 
 // Configuration
 
@@ -28,44 +29,43 @@ app.configure('production', function(){
 
 // Routes
 
-pos = (new Date).getTime();
-u = 'plainstudios%2Fshort-records-rock';
-
-app.get('/counter/(:steps)?', function(req, res){
-  res.render('counter_io', {
-    title: 'Express',
-    steps: req.param( 'steps', 100 )
-  });
-});
-
-app.get('/(:steps)?', function(req, res){
-  if(req.param('pos')) {
-    pos = (new Date).getTime();
+app.get('/(:code)?', function(req, res){
+  if( (url = req.param('url')) ) {
+    code = 'MHD' // TODO make dynamic code
+    songs[code] = { url: url, time: serverTime()}
+    res.redirect('/' + code);
   }
-  res.render('index', {
-    title: 'Express',
-    url: 'http%3A%2F%2Fsoundcloud.com%2F'+u+'&amp;enable_api=true&amp;object_id=scPlayer',
-    steps: req.param( 'steps', 100 )
-  });
+  else {
+    if( !(song = songs[req.param('code')]) ) {
+      res.render('index', {});
+    }
+    else {
+      if( req.param('reset') ) {
+        songs[code] = { url: song.url, time: serverTime()}
+      }
+      res.render('play', {
+        url: encodeURIComponent(song.url ) + '&enable_api=true&object_id=scPlayer',
+        code: req.param('code'),
+        interval: req.param('int', 300)
+      });
+    }
+  }
 });
 app.listen(3000);
 
-serverTime = function() {
-  return (new Date).getTime();
+serverTime = function(offset) {
+  offset = offset ? offset : 0;
+  return (new Date).getTime() - offset;
 }
-
-songTime = function() {
-  return serverTime() - pos;
-}
-
 
 var socket = require('socket.io').listen(app);
 socket.on('connection', function(client){
-  client.on('message', function(cmd){
-    if( cmd == 'ping' ){
-      client.send({cmd: cmd, data: songTime(), serverTime: serverTime()});
+  client.on('message', function(message){
+    if( message.cmd == 'getTime' && ( song = songs[message.songCode]) ){
+      client.send({cmd: message.cmd, songTime: serverTime(song.time), serverTime: serverTime() });
     }
   });
+
   //client.on('disconnect', function(){ … })
 });
 
