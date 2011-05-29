@@ -50,9 +50,12 @@ app.get('/(:steps)?', function(req, res){
 });
 app.listen(3000);
 
-
 serverTime = function() {
-  return (new Date).getTime() - pos;
+  return (new Date).getTime();
+}
+
+songTime = function() {
+  return serverTime() - pos;
 }
 
 
@@ -60,7 +63,7 @@ var socket = require('socket.io').listen(app);
 socket.on('connection', function(client){
   client.on('message', function(cmd){
     if( cmd == 'ping' ){
-      client.send({cmd: cmd, data: serverTime()});
+      client.send({cmd: cmd, data: songTime(), serverTime: serverTime()});
     }
   });
   //client.on('disconnect', function(){ … })
