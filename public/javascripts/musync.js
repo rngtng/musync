@@ -1,9 +1,10 @@
 (function(){
   var musync = window.musync = window.ms = {
     socket: new io.Socket(),
-    serverTime: 0,
-    localTime: 0,
-    timeDiff: 0,
+    serverSongTime: 0,
+    localTimeStartPing: 0,
+    networkDelay: 0,
+    clockDiff: 0,
 
     loaded: false,
     playing: false,
@@ -16,16 +17,17 @@
 
     getTime: function() {
       mu = musync;
-      mu.localTime = mu.clientTime();
+      mu.localTimeStartPing = mu.clientTime();
       mu.socket.send({cmd: 'getTime', songCode: mu.code});
     },
 
-    receiveTime: function(time) {
-      this.timeDiff = (this.clientTime() - this.localTime) / 2;
-      this.serverTime = time + this.timeDiff;
+    receiveTime: function(songTime, serverTime) {
+      this.networkDelay = (this.clientTime() - this.localTimeStartPing) / 2;
+      this.serverSongTime = songTime + this.networkDelay;
+      this.clockDiff = serverTime + this.networkDelay - this.clientTime();
       this.setCounter();
       if(this.loaded) {
-        this.player.api_seekTo(this.serverTime / 1000 );
+        this.player.api_seekTo(this.serverSongTime / 1000 );
         if(this.playing) {
           this.startPlay();
         }
@@ -33,7 +35,7 @@
     },
 
     setCounter: function() {
-      $("#counter").html('' + (this.serverTime / 1000) + ' + ' + this.timeDiff);
+      $("#counter").html('' + (this.serverSongTime / 1000) + ' + NwDelay: ' + this.networkDelay + 'ClockDiff:' + this.clockDiff);
     },
 
     startPlay: function() {
@@ -73,7 +75,7 @@
     onMessage: function(message) {
       mu = musync;
       if(message.cmd == 'getTime') {
-        mu.receiveTime(parseInt(message.songTime));
+        mu.receiveTime(parseInt(message.songtime), parseInt(message.servertime));
       }
     },
 

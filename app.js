@@ -62,7 +62,7 @@ var socket = require('socket.io').listen(app);
 socket.on('connection', function(client){
   client.on('message', function(message){
     if( message.cmd == 'getTime' && ( song = songs[message.songCode]) ){
-      client.send({cmd: message.cmd, songTime: serverTime(song.time), serverTime: serverTime() });
+      client.send({cmd: message.cmd, songtime: serverTime(song.time), servertime: serverTime() });
     }
   });
 
