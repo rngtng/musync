@@ -1,13 +1,27 @@
 //http://soundcloud.com/frohlocker/caterina-valente-ich-h-tt-getanzt-heut-nacht-frohlocker-remix
 //http://soundcloud.com/renegadesofjazz/kid-loco-the-passenger
-.header Paste your favorite SoundCloud URL:
-form(action="/")
-  input(name="url",
-        class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c",
-        value="http://soundcloud.com/plainstudios/short-records-rock")
+.create
+  .header Paste your favorite SoundCloud URL:
+  form(action="#")
+    input(name="url",
+          class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c",
+          value="http://soundcloud.com/plainstudios/short-records-rock")
 
-  div(data-theme="c", class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c")
-    span(class="ui-btn-inner ui-btn-corner-all")
-      span(class="ui-btn-text") Create
-    input(name="create", type="submit", value="Create", class="ui-btn-hidden")
+    div(data-theme="c", class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c submit")
+      span(class="ui-btn-inner ui-btn-corner-all")
+        span(class="ui-btn-text") Create
+      input(name="create", type="submit", value="Create", class="ui-btn-hidden submit")
 
+.show
+  .header Ready! Now share this URL to any device:
+  form(action="#")
+    input(name="url",
+          class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c preview",
+          value="")
+
+    div(data-theme="c", class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c submit")
+      span(class="ui-btn-inner ui-btn-corner-all")
+        span(class="ui-btn-text") Start playing
+      input(name="create", type="submit", value="Start playing", class="ui-btn-hidden submit")
+
+script(type='text/javascript', src='/javascripts/behavior.js')

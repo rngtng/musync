@@ -34,6 +34,7 @@ app.configure('production', function() {
 app.get('/show/:code', function(req, res) {
   url = (req.headers.referer.indexOf('localhost') > 0) ? 'localhost' : serverUrl;
   res.render('show', {
+    layout: false,
     code: req.param('code'),
     url: 'http://' + url + ':' + port
   });

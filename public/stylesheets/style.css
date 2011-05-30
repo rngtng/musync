@@ -42,3 +42,10 @@ body {
 
 a {
   color: #00B7FF;}
+
+.show {
+  display: none;}
+
+.preview {
+  font-weight: bold;
+  text-align: center;}
