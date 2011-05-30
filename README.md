@@ -1,4 +1,20 @@
-## m[:u]sync
+## m[:u]sync - your Music synced in the Crowd
+
+Play SoundCloud Sounds synchronized among multiple devices.
+Post any SoundCloud URL, open given URL on any  other devices and enjoy synchronized playback! Yay!
+
+Go and  try yourself:
+[http://normannenstrasse.mine.nu:3000]
+
+Source at GitHub:
+[http://github.com/rngtng/musync]
+
+
+A _Berlin MusicHack Day_ Hack in node.js by
+
+  * Tobias Bielohlawek
+  * Christoph Büttner
+  * David Link
 
 ## Resources:
 install node.js:
@@ -10,13 +26,4 @@ packet manager npm
     curl http://npmjs.org/install.sh | sh
 
 
-html5/node.js boilerplate: https://github.com/mbrochh/node-express-html5-boilerplate
-
-consits of:
-
-* middleware _connect_: http://senchalabs.github.com/connect/
-* webframework _express_: http://expressjs.com/
-* html5 boilerplate: http://html5boilerplate.com/
-* websockets:
-  * http://socket.io
-  * http://nowjs.com
+## LICENCE

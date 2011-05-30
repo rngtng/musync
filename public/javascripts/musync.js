@@ -1,5 +1,5 @@
 (function(){
-  var musync = window.musync = window.ms = {
+  var musync = window.musync = {
     socket: new io.Socket(),
     serverSongTime: 0,
     localTimeStartPing: 0,
@@ -64,9 +64,6 @@
       mu.player = soundcloud.getPlayer('scPlayer');
       mu.startPlay();
       mu.player.api_setVolume(0);
-      mu.getTime();
-      console.log(mu.interval);
-      setInterval(mu.getTime, mu.interval);
     },
 
     onMediaPlay: function(pl, data) {
@@ -81,6 +78,8 @@
       mu = musync;
       mu.loaded = true;
       mu.playing = true;
+      mu.getTime();
+      setInterval(mu.getTime, mu.interval);
     },
 
     onMediaPause: function(pl, data) {
