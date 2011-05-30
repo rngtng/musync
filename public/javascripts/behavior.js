@@ -6,9 +6,8 @@ $(function() {
       data: dataString,
       success: function(data) {
         $(".create").hide();
+        $(".show input[name='url']").val(data);
         $(".show").show();
-        $(".show input[name='url']").val(data)
-        $(".show form").attr('action', data)
       }
     });
     return false;

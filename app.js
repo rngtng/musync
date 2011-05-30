@@ -31,15 +31,6 @@ app.configure('production', function() {
 });
 
 // Routes
-app.get('/show/:code', function(req, res) {
-  url = (req.headers.referer.indexOf('localhost') > 0) ? 'localhost' : serverUrl;
-  res.render('show', {
-    layout: false,
-    code: req.param('code'),
-    url: 'http://' + url + ':' + port
-  });
-});
-
 app.get('/:code', function(req, res) {
   if( (song = songs[req.param('code')]) ) {
     if( req.param('reset') ) {
@@ -65,13 +56,18 @@ app.get('/', function(req, res) {
     }
 
     songs[code] = { url: url, time: null}
-    res.redirect('/show/' + code);
+    res.send(hostUrl(req.headers.referer) + '/' + code);
   }
   else {
-    res.render('index', {});
+    res.render('index');
   }
 });
 app.listen(port);
+
+hostUrl = function(referer) {
+  var hostUrl = (referer.indexOf('localhost') > 0) ? 'localhost' : serverUrl;
+  return 'http://' + hostUrl + ':' + port;
+}
 
 serverTime = function(offset) {
   offset = offset ? offset : 0;

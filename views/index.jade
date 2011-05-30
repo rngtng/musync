@@ -1,8 +1,8 @@
 //http://soundcloud.com/frohlocker/caterina-valente-ich-h-tt-getanzt-heut-nacht-frohlocker-remix
 //http://soundcloud.com/renegadesofjazz/kid-loco-the-passenger
-.create
-  .header Paste your favorite SoundCloud URL:
-  form(action="#")
+form(action="#")
+  .create
+    .header Paste your favorite SoundCloud URL:
     input(name="url",
           class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c",
           value="http://soundcloud.com/plainstudios/short-records-rock")
@@ -12,9 +12,8 @@
         span(class="ui-btn-text") Create
       input(name="create", type="submit", value="Create", class="ui-btn-hidden submit")
 
-.show
-  .header Ready! Now share this URL to any device:
-  form(action="#")
+  .show
+    .header Ready! Now share this URL to any device:
     input(name="url",
           class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c preview",
           value="")
